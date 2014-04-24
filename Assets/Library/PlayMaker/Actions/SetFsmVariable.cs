@@ -26,10 +26,9 @@ namespace HutongGames.PlayMaker.Actions
         public bool everyFrame;
 
         private GameObject cachedGO;
-//        private PlayMakerFSM sourceFsm;
-		private PlayMakerFSM targetFsm;
-		private NamedVariable targetVariable;
+        private PlayMakerFSM sourceFsm;
         private INamedVariable sourceVariable;
+        private NamedVariable targetVariable;
 
         public override void Reset()
         {
@@ -65,21 +64,13 @@ namespace HutongGames.PlayMaker.Actions
 
             if (go != cachedGO)
             {
-//                sourceFsm = ActionHelpers.GetGameObjectFsm(go, fsmName.Value);
-//                sourceVariable = sourceFsm.FsmVariables.GetVariable(setValue.variableName);
-//                targetVariable = Fsm.Variables.GetVariable(setValue.variableName);
-//
-//                setValue.Type = FsmUtility.GetVariableType(targetVariable);
-//
-//                if (!string.IsNullOrEmpty(setValue.variableName) && sourceVariable == null)
-//                {
-//                    LogWarning("Missing Variable: " + setValue.variableName);
-//                }
-				
-				targetFsm = ActionHelpers.GetGameObjectFsm(go, fsmName.Value);
-				targetVariable = targetFsm.FsmVariables.GetVariable(variableName.Value);
-				
-				if (!string.IsNullOrEmpty(variableName.Value) && targetVariable == null)
+                sourceFsm = ActionHelpers.GetGameObjectFsm(go, fsmName.Value);
+                sourceVariable = sourceFsm.FsmVariables.GetVariable(setValue.variableName);
+                targetVariable = Fsm.Variables.GetVariable(setValue.variableName);
+
+                setValue.Type = FsmUtility.GetVariableType(targetVariable);
+
+                if (!string.IsNullOrEmpty(setValue.variableName) && sourceVariable == null)
                 {
                     LogWarning("Missing Variable: " + setValue.variableName);
                 }
@@ -97,7 +88,7 @@ namespace HutongGames.PlayMaker.Actions
 
             InitFsmVar();
 
-//            setValue.GetValueFrom(sourceVariable);
+            setValue.GetValueFrom(sourceVariable);
             setValue.ApplyValueTo(targetVariable);
         }
     }
