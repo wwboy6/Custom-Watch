@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Gear : MonoBehaviour {
+public class Gear : RotatingObject {
 	
 	[SerializeField]
 	protected int _toothCount = 0;
@@ -12,6 +12,7 @@ public class Gear : MonoBehaviour {
 		}
 
 		set {
+			cps *= value/_toothCount;
 			_toothCount = value;
 			refresh();
 		}
@@ -21,14 +22,15 @@ public class Gear : MonoBehaviour {
 	protected List<Transform> toothes = new List<Transform>();
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
+		base.Start();
 		refresh();
+		cps = toothCount*2f;
 	}
 
-	// Update is called once per frame
-//	void Update () {
-//	
-//	}
+	//protected override void Update () {
+		//base.Update();
+	//}
 	
 	[ContextMenu("Refresh")]
 	public void refresh() {

@@ -85,6 +85,7 @@ namespace HutongGames.PlayMaker.Actions
 		void DoActivateGameObject()
 		{
 			var go = Fsm.GetOwnerDefaultTarget(gameObject);
+			Debug.Log(go.name + " " + activate.Value);
 			
 			if (go == null)
 			{
