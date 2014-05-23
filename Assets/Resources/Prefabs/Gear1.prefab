@@ -8,8 +8,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: EscapeWheelTooth
+  m_Name: Gear1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +27,9 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 95: {fileID: 9500000}
+  - 64: {fileID: 6400000}
   m_Layer: 0
-  m_Name: body
+  m_Name: ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,9 +53,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: -1.15202326e-07, y: .707106709, z: -.707106829, w: -1.15202312e-07}
-  m_LocalPosition: {x: .000736162066, y: .539672613, z: -.00110962242}
-  m_LocalScale: {x: .762500048, y: .182109281, z: .600000024}
+  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalPosition: {x: 0, y: 0, z: .0193711054}
+  m_LocalScale: {x: 4.71671486, y: 3.56701636, z: 4.71671486}
   m_Children: []
   m_Father: {fileID: 400000}
 --- !u!23 &2300000
@@ -83,7 +85,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Mesh: {fileID: 4300000, guid: 9258dd7064da84aef828b8a2510413ec, type: 3}
+  m_Mesh: {fileID: 4300000, guid: ef8e5bfa3793e4f43a26d20a73527901, type: 3}
+--- !u!64 &6400000
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: ef8e5bfa3793e4f43a26d20a73527901, type: 3}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 2
@@ -92,12 +107,31 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 9258dd7064da84aef828b8a2510413ec, type: 3}
+  m_Avatar: {fileID: 9000000, guid: ef8e5bfa3793e4f43a26d20a73527901, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f415b28afb119420aa65c22ee24c72d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mw: {fileID: 0}
+  timeOffset: 0
+  cps: 1
+  period: 1
+  rotationAxis: {x: 0, y: 0, z: -1}
+  _toothCount: 12
+  _toothName: EscapeWheelTooth
+  toothes: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

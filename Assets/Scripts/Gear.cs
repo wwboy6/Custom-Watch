@@ -19,6 +19,19 @@ public class Gear : RotatingObject {
 	}
 	
 	[SerializeField]
+	protected string _toothName = "SquareGearTooth";
+	public string toothName {
+		get {
+			return _toothName;
+		}
+		
+		set {
+			_toothName = value;
+			refresh();
+		}
+	}
+	
+	[SerializeField]
 	protected List<Transform> toothes = new List<Transform>();
 
 	// Use this for initialization
@@ -32,6 +45,10 @@ public class Gear : RotatingObject {
 		//base.Update();
 	//}
 	
+	protected GameObject getToothPrefab() {
+		return (GameObject) Resources.Load("Prefabs/"+toothName);
+	}
+	
 	[ContextMenu("Refresh")]
 	public void refresh() {
 		foreach(Transform tooth in toothes) {
@@ -43,7 +60,7 @@ public class Gear : RotatingObject {
 		}
 		toothes.Clear();
 
-		GameObject toothPrefab = (GameObject) Resources.Load("Prefabs/SquareGearTooth");
+		GameObject toothPrefab = getToothPrefab();
 		for (int i=0; i<toothCount; ++i) {
 			Transform tooth = ((GameObject) Instantiate(toothPrefab)).transform;
 			tooth.parent = transform;

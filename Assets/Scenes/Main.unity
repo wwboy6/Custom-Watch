@@ -315,7 +315,7 @@ MonoBehaviour:
         - Put Gear 0
         - Swtich isRunning
         actionEnabled: 01010101
-        actionIsOpen: 00010000
+        actionIsOpen: 00000000
         actionStartIndex: 00000000090000000e00000014000000
         actionHashCodes: 3b448f99b4797e4ab81f8badb81f8bad
         unityObjectParams: []
@@ -433,9 +433,9 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState: Choose Location
+        toState: Ready
         linkStyle: 0
-        linkConstraint: 1
+        linkConstraint: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -446,7 +446,7 @@ MonoBehaviour:
         - 
         actionEnabled: 0101
         actionIsOpen: 0101
-        actionStartIndex: 0000000009000000
+        actionStartIndex: 000000000b000000
         actionHashCodes: 3b448f99b81f8bad
         unityObjectParams: []
         fsmGameObjectParams:
@@ -480,13 +480,13 @@ MonoBehaviour:
         fsmStringParams: []
         fsmObjectParams: []
         fsmVarParams: []
-        byteData: 0000c842000001000000000000000000000000016d6f7573655069636b506f730000000000000000000000000100000000010000004e455854000100
-        arrayParamSizes: 00000000
+        byteData: 0000c842000001000000000000000000000000016d6f7573655069636b506f73000000000000000000000000010000000001080000000009000000000000004e455854000100
+        arrayParamSizes: 02000000
         arrayParamTypes:
         - HutongGames.PlayMaker.FsmInt
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0f00000011000000130000001c0000001c0000000f0000000c0000001100000001000000140000001300000017000000170000001100000001000000
+        paramDataType: 0f00000011000000130000001c0000001c0000000f0000000c00000010000000100000001100000001000000140000001300000017000000170000001100000001000000
         paramName:
         - rayDistance
         - storeDidPickObject
@@ -495,6 +495,8 @@ MonoBehaviour:
         - storeNormal
         - storeDistance
         - layerMask
+        - 
+        - 
         - invertMask
         - everyFrame
         - gameObjectVariable
@@ -503,8 +505,8 @@ MonoBehaviour:
         - notEqualEvent
         - storeResult
         - everyFrame
-        paramDataPos: 00000000050000000000000007000000200000002d00000000000000320000003400000000000000010000003500000039000000390000003b000000
-        paramByteDataSize: 050000000200000000000000190000000d00000005000000000000000200000001000000000000000000000004000000000000000200000001000000
+        paramDataPos: 00000000050000000000000007000000200000002d0000000000000032000000370000003c0000003e00000000000000010000003f000000430000004300000045000000
+        paramByteDataSize: 050000000200000000000000190000000d000000050000000000000005000000050000000200000001000000000000000000000004000000000000000200000001000000
     - name: Create Component
       description: 
       colorIndex: 0
@@ -522,7 +524,7 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState: Check
+        toState: Drag Location
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
@@ -569,7 +571,7 @@ MonoBehaviour:
             useVariable: 1
             name: currentObject
             tooltip: 
-            showInInspector: 0
+            showInInspector: 1
             networkSync: 0
             value: {fileID: 0}
         animationCurveParams: []
@@ -811,7 +813,7 @@ MonoBehaviour:
         actionNames:
         - HutongGames.PlayMaker.Actions.SetGUIText
         - HutongGames.PlayMaker.Actions.ActivateGameObject
-        - HutongGames.PlayMaker.Actions.GetMouseButtonUp
+        - HutongGames.PlayMaker.Actions.GetMouseButtonDown
         customNames:
         - 
         - Show Watch
@@ -854,7 +856,7 @@ MonoBehaviour:
           value: Choose Location
         fsmObjectParams: []
         fsmVarParams: []
-        byteData: 000100000001000000000046494e49534845440001
+        byteData: 000100000000000000000046494e49534845440001
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
@@ -1150,6 +1152,104 @@ MonoBehaviour:
         - everyFrame
         paramDataPos: 00000000000000000b0000000f0000000000000001000000130000001e0000002000000021000000
         paramByteDataSize: 0b00000000000000040000000400000000000000000000000b000000020000000100000001000000
+    - name: Drag Location
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 73.6015625
+        y: 530.46875
+        width: 107
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: NEXT
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: Check
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.MousePick
+        - HutongGames.PlayMaker.Actions.SetV3If
+        - HutongGames.PlayMaker.Actions.SetPosition
+        - HutongGames.PlayMaker.Actions.GetMouseButtonUp
+        customNames:
+        - 
+        - 
+        - 
+        - 
+        actionEnabled: 01010101
+        actionIsOpen: 01010101
+        actionStartIndex: 000000000a0000000f00000017000000
+        actionHashCodes: 3b448f999b041ea48b80e9a52d8b867b
+        unityObjectParams: []
+        fsmGameObjectParams:
+        - useVariable: 1
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: {fileID: 0}
+        fsmOwnerDefaultParams:
+        - ownerOption: 1
+          gameObject:
+            useVariable: 1
+            name: currentObject
+            tooltip: 
+            showInInspector: 1
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams: []
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 0000c8420000016861734d6f7573655069636b000000000000000000000000016d6f7573655069636b506f73000000000000000000000000010000000001080000000000000100016861734d6f7573655069636b00000000000000000000000001707265764d6f7573655069636b000000000000000000000000016d6f7573655069636b506f7300000000000000000000000001707265764d6f7573655069636b0100000000000000000000000001707265764d6f7573655069636b000000000100000000010000000001010000000100000000004e4558540001
+        arrayParamSizes: 01000000
+        arrayParamTypes:
+        - HutongGames.PlayMaker.FsmInt
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 0f00000011000000130000001c0000001c0000000f0000000c000000100000001100000001000000110000001c0000001c0000001c00000001000000140000001c0000000f0000000f0000000f000000070000000100000001000000070000001700000011000000
+        paramName:
+        - rayDistance
+        - storeDidPickObject
+        - storeGameObject
+        - storePoint
+        - storeNormal
+        - storeDistance
+        - layerMask
+        - 
+        - invertMask
+        - everyFrame
+        - boolVariable
+        - targetVariable
+        - trueValue
+        - falseValue
+        - everyFrame
+        - gameObject
+        - vector
+        - x
+        - y
+        - z
+        - space
+        - everyFrame
+        - lateUpdate
+        - button
+        - sendEvent
+        - storeResult
+        paramDataPos: 000000000500000000000000130000002c00000039000000000000003e000000430000004500000046000000540000006e00000087000000a100000000000000a2000000bc000000c1000000c6000000cb000000cf000000d0000000d1000000d5000000d9000000
+        paramByteDataSize: 050000000e00000000000000190000000d00000005000000000000000500000002000000010000000e0000001a000000190000001a00000001000000000000001a000000050000000500000005000000040000000100000001000000040000000400000002000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -1163,6 +1263,9 @@ MonoBehaviour:
     - name: PUT_GEAR0
       isSystemEvent: 0
       isGlobal: 0
+    - name: SKIP
+      isSystemEvent: 0
+      isGlobal: 0
     - name: TRIGGER_WATCH
       isSystemEvent: 0
       isGlobal: 0
@@ -1171,6 +1274,12 @@ MonoBehaviour:
       floatVariables: []
       intVariables: []
       boolVariables:
+      - useVariable: 1
+        name: hasMousePick
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        value: 0
       - useVariable: 1
         name: isRunning
         tooltip: 
@@ -1183,6 +1292,12 @@ MonoBehaviour:
       - useVariable: 1
         name: mousePickPos
         tooltip: 
+        showInInspector: 1
+        networkSync: 0
+        value: {x: 0, y: 0, z: 0}
+      - useVariable: 1
+        name: prevMousePick
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {x: 0, y: 0, z: 0}
@@ -1193,7 +1308,7 @@ MonoBehaviour:
       - useVariable: 1
         name: currentObject
         tooltip: 
-        showInInspector: 0
+        showInInspector: 1
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
@@ -1355,7 +1470,7 @@ GameObject:
   - 4: {fileID: 678010131}
   - 212: {fileID: 678010133}
   - 65: {fileID: 678010132}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: btn_gear0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1458,6 +1573,32 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 620017934}
+--- !u!1 &985128220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 985128221}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &985128221
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 985128220}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .110728405, y: .453741848, z: .106933594}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1017558173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,7 +1608,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1017558177}
   - 65: {fileID: 1017558175}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: detectionPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
