@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using HutongGames.PlayMaker;
 
 public class Gear : RotatingObject {
 	
@@ -17,6 +18,8 @@ public class Gear : RotatingObject {
 			refresh();
 		}
 	}
+	public void setToothCount(int i) { toothCount = i; }
+	public int getToothCount() { return toothCount; }
 	
 	[SerializeField]
 	protected string _toothName = "SquareGearTooth";

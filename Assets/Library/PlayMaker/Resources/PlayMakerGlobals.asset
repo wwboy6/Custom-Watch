@@ -28,3 +28,6 @@ MonoBehaviour:
   events:
   - TRIGGER_WATCH
   - CHOOSE_LOC
+  - SCALE
+  - TOOTH
+  - TOOTH_COUNT

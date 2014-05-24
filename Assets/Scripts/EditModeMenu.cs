@@ -4,19 +4,14 @@ using HutongGames.PlayMaker;
 
 public class EditModeMenu : MonoBehaviour {
 
-	public Transform rootMenu;
-	public Transform gearsMenu;
-
 	// Use this for initialization
 	void Start () {
-
-		GetComponent<PlayMakerFSM>().Fsm.GetFsmGameObject("rootMenu").Value = rootMenu.gameObject;
-		GetComponent<PlayMakerFSM>().Fsm.GetFsmGameObject("gearsMenu").Value = gearsMenu.gameObject;
+		Transform gearsMenu = GetComponent<PlayMakerFSM>().Fsm.GetFsmGameObject("gearsMenu").Value.transform;
 
 		GameObject[] gearButtons = Resources.LoadAll<GameObject>("Prefabs/GearButtons");
 
-		Vector3 pos = new Vector3(0, 1.17f, 0);
-		Vector3 diff = new Vector3(0, 1.17f, 0);
+		Vector3 pos = new Vector3(0, 1.2f, 0);
+		Vector3 diff = new Vector3(0, 1.2f, 0);
 		foreach(GameObject gearButton in gearButtons) {
 			Transform btn = ((GameObject) Instantiate (gearButton)).transform;
 			btn.name = gearButton.name;
