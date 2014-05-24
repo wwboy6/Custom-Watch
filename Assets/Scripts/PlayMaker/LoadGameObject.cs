@@ -1,10 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
-	[ActionCategory(ActionCategory.UnityObject)]
+	[ActionCategory(ActionCategory.GameObject)]
 	[Tooltip("Load resource according to the path")]
-	public class LoadPrefab : FsmStateAction
+	public class LoadGameObject : FsmStateAction
 	{
 		[RequiredField]
 		[Tooltip("The path of the resouce.")]
@@ -23,8 +23,8 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			targetVariable.Value = Resources.Load(resourcePath.Value);
-
+			targetVariable.Value = (GameObject) Resources.Load(resourcePath.Value);
+			
 			Finish();
 		}
 	}
