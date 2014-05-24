@@ -1,5 +1,5 @@
 ﻿/* SCRIPT INSPECTOR 2
- * version 2.1.6, January 2014
+ * version 2.1.8, May 2014
  * Copyright © 2012-2014, Flipbook Games
  * 
  * Unity's legendary custom inspector for C#, UnityScript and Boo scripts,
@@ -507,7 +507,7 @@ public class FGTextEditor
 	public int GetLineAt(float yOffset)
 	{
 		if (!wordWrapping /*|| !CanEdit()*/ || textBuffer.lines.Count <= 1)
-			return (int) (yOffset / charSize.y);
+			return Mathf.Min((int) (yOffset / charSize.y), textBuffer.lines.Count - 1);
 
 		GetLineOffset(textBuffer.lines.Count);
 
@@ -1529,6 +1529,16 @@ public class FGTextEditor
 			scrollToCaret = false;
 			FGTextBuffer.CaretPos caretPos = codeViewDragging && mouseDownOnSelection ? mouseDropPosition : caretPosition;
 
+			if (showLineNumbers || trackChanges)
+				contentRect.xMax += margin;
+
+			codeViewRect.x = scrollPosition.x + margin;
+			codeViewRect.y = scrollPosition.y;
+			codeViewRect.width = scrollViewRect.width - margin - 4f;
+			codeViewRect.height = scrollViewRect.height - 4f;
+
+			bool hasHorizontalSB = !wordWrapping && contentRect.width - 4f - margin > codeViewRect.width;
+
 			float yOffset;
 			if (wordWrapping /*&& !IsLoading*/)
 			{
@@ -1540,16 +1550,16 @@ public class FGTextEditor
 			{
 				yOffset = charSize.y * caretPos.line;
 			}
-				
+
 			if (yOffset < scrollPosition.y)
 			{
 				scrollPosition.y = yOffset;
 				needsRepaint = true;
 				scrollToCaret = true;
 			}
-			else if (yOffset + charSize.y > scrollPosition.y + scrollViewRect.height - 22f)
+			else if (yOffset + charSize.y > scrollPosition.y + scrollViewRect.height - (hasHorizontalSB ? 23f : 8f))
 			{
-				scrollPosition.y = Mathf.Max(0f, yOffset + charSize.y - scrollViewRect.height + 22f);
+				scrollPosition.y = Mathf.Max(0f, yOffset + charSize.y - scrollViewRect.height + (hasHorizontalSB ? 23f : 8f));
 				needsRepaint = true;
 				scrollToCaret = true;
 			}
@@ -1678,8 +1688,8 @@ public class FGTextEditor
 			codeViewRect.width = scrollViewRect.width - margin - 4f;
 			codeViewRect.height = scrollViewRect.height - 4f;
 
-			bool hasHorizontalSB = contentRect.width - 4f - margin > codeViewRect.width;
-			bool hasVerticalSB = contentRect.height - 4f > codeViewRect.height;
+			bool hasHorizontalSB = !wordWrapping && contentRect.width - 4f - margin > codeViewRect.width;
+			bool hasVerticalSB = (wordWrapping ? contentHeight : contentRect.height) - 4f > codeViewRect.height;
 			if (hasHorizontalSB && hasVerticalSB)
 			{
 				codeViewRect.width -= 15f;
@@ -1874,7 +1884,17 @@ public class FGTextEditor
 					}
 					else
 					{
-						GUI.Label(tempRC, block.text, block.style);
+						if (tempRC.x - margin < scrollPosition.x && tempRC.xMax - margin > scrollPosition.x)
+						{
+							int skipBeginning = (int)(scrollPosition.x - tempRC.x + margin) / (int)charSize.x;
+							int maxChars = (int)scrollViewRect.width / (int)charSize.x + 1;
+							GUI.Label(new Rect(tempRC){ x = tempRC.x + skipBeginning * charSize.x },
+								block.text.Substring(skipBeginning, Mathf.Min(block.text.Length - skipBeginning, maxChars)), block.style);
+						}
+						else
+						{
+							GUI.Label(tempRC, block.text, block.style);
+						}
 					}
 
 					tempRC.x += tempRC.width;

@@ -1,5 +1,5 @@
 ﻿/* SCRIPT INSPECTOR 2
- * version 2.1.6, January 2014
+ * version 2.1.8, May 2014
  * Copyright © 2012-2014, Flipbook Games
  * 
  * Unity's legendary custom inspector for C#, UnityScript and Boo scripts,
@@ -14,7 +14,6 @@
 
 using UnityEngine;
 using UnityEditor;
-//using UnityEditor.Callbacks;
 using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
@@ -146,7 +145,7 @@ public class FGTextBufferManager : ScriptableObject
 			return buffers[0];
 		}
 
-		FGTextBuffer buffer = ScriptableObject.CreateInstance<FGTextBuffer>();
+		FGTextBuffer buffer = CreateInstance<FGTextBuffer>();
 		instance.allBuffers.Add(buffer);
 		buffer.guid = guid;
 //		EditorUtility.SetDirty(instance);
@@ -156,7 +155,7 @@ public class FGTextBufferManager : ScriptableObject
 	public static void DestroyBuffer(FGTextBuffer buffer)
 	{
 		instance.allBuffers.Remove(buffer);
-		ScriptableObject.DestroyImmediate(buffer);
+		DestroyImmediate(buffer);
 	}
 
 	public class FGScriptPostprocessor : AssetPostprocessor
@@ -223,23 +222,14 @@ public class FGTextBufferManager : ScriptableObject
 		FGTextBuffer buffer = allBuffers.Find((FGTextBuffer x) => guid == x.guid);
 		if (buffer != null)
 		{
-			if (buffer.justSavedNow)
-			{
-				buffer.justSavedNow = false;
-				buffer.RescanHyperlinks();
-				buffer.UpdateViews();
-			}
-			else
-			{
-				buffer.Reload();
-			}
+			buffer.Reload();
 		}
 	}
 
 	public void OnAssetMoved(string assetPath)
 	{
 		string guid = AssetDatabase.AssetPathToGUID(assetPath);
-		FGTextBuffer buffer = allBuffers.Find((FGTextBuffer x) => guid == x.guid);
+		FGTextBuffer buffer = allBuffers.Find(x => guid == x.guid);
 		if (buffer != null)
 		{
 			buffer.justSavedNow = true;

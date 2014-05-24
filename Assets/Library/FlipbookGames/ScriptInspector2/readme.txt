@@ -1,18 +1,20 @@
 SCRIPT INSPECTOR 2
-version 2.1.6, January 2014
+version 2.1.8, May 2014
 Copyright © 2012-2014, Flipbook Games
 --------------------------------
 
 Unity's legendary custom inspector for C#, UnityScript and Boo scripts, now transformed into a powerful Script, Shader, and Text Editor!!!
 
 
-IMPORTANT UPGRADING NOTE:
-Please remove the previous version of Script Inspector before upgrading from a pre-2.0 version, restart Unity, and then import the Script Inspector 2!
-
-
 NOTE TO UNITY 4 USERS:
-This package has been exported from Unity 3.5.0 to allow using it in earlier versions of Unity. Unity 4 has different set of properties for Font assets and fonts imported from Unity 3 packages do not give the best results in Unity 4. In order to make the text in Script Inspector 2 crisp and more readable after importing this package you should set the import settings for all fonts located in Assets/FlipbookGames/ScriptInspector2/Editor/EditorResources to use the Dynamic font rendering and rendering mode to be Hinted Smooth.
+This package has been exported from Unity 3.5.6 to allow using it in earlier versions of Unity. Unity 4 has different set of properties for Font assets and fonts imported from Unity 3 packages do not give the best results in Unity 4. In order to make the text in Script Inspector 2 crisp and more readable after importing this package you should set the import settings for all fonts located in Assets/FlipbookGames/ScriptInspector2/Editor/EditorResources to use the Dynamic font rendering and rendering mode to be Hinted Smooth.
 
+
+Bug fixed in v2.1.8:
+- Rarely reloading a script would fail after being modified outside of Unity (thanks to Jim Vaughn)
+
+New in v2.1.7:
+- Improved performance and fixes for large single line files (thanks to mcmorry)
 
 Bug fixed in v2.1.6:
 - Incorrect handling of rich text tags (thanks to Callski)
@@ -171,7 +173,7 @@ After saving the changes made in Script Inspector 2 the Unity will compile them 
 Reimported scripts, either manually or automatically as a result of external changes, will be updated in the Script Inspector views automatically. Well, unless those scripts have been modified and not saved before reimporting, in which case the Script Inspector 2 gives you a warning and asking which version to keep.
 
 
-4. List of keyboard shortcuts and mouse functions
+5. List of keyboard shortcuts and mouse functions
   (assume ⌘ instead of Ctrl on OS X if not noted otherwise)
 
 a) Caret Navigation (all these clear the selection)
@@ -252,14 +254,14 @@ i) Font size (only for dynamic fonts)
 
 Ctrl+Minus, Ctrl+Plus, Ctrl+Equals sign, Ctrl+Mouse Wheel, and magnify gestures – increase and decrease font size
 
-5. Future plans
+6. Future plans
 
 Now that the code editing functionality is implemented, the short term plan is to extend that with code navigation, code completion, parameters hints for function calls, etc.
 
 The long term plan is to add full debugging capabilities and turn Unity into something that only the greatest AAA game engines may offer.
 
 
-6. Support, Bugs, Requests, and Feedback
+7. Support, Bugs, Requests, and Feedback
 
 Feel free to contact Flipbook Games at info@flipbookgames.com or visit http://flipbookgames.com/ for support, bug reports, suggestions, feedback, etc...
 

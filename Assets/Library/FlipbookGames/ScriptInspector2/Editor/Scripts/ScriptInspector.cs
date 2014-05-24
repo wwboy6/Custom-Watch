@@ -1,22 +1,24 @@
 ﻿/* SCRIPT INSPECTOR 2
- * version 2.1.6, January 2014
+ * version 2.1.8, May 2014
  * Copyright © 2012-2014, Flipbook Games
  * 
  * Unity's legendary custom inspector for C#, UnityScript and Boo scripts,
  * now transformed into a powerful Script, Shader, and Text Editor!!!
  * 
- * IMPORTANT UPGRADING NOTE FOR PRE-2.0 USERS:
- * Please remove the previous version of Script Inspector before updgrading,
- * restart Unity, and then import the latest version of Script Inspector 2!
- * 
  * NOTE TO UNITY 4 USERS:
- * This package has been exported from Unity 3.5.0 to allow using it in earlier
+ * This package has been exported from Unity 3.5.6 to allow using it in earlier
  * versions of Unity. Unity 4 has different set of properties for Font assets and
  * fonts imported from Unity 3 packages do not give the best results in Unity 4.
  * In order to make the text in Script Inspector 2 crisp and more readable after
  * importing this package you should set the import settings for all fonts
  * located in Assets/FlipbookGames/ScriptInspector2/Editor/EditorResources to use
  * the Dynamic font rendering and rendering mode to be Hinted Smooth.
+ * 
+ * Bug fixed in v2.1.8:
+ * - Rarely reloading a script would fail after being modified outside of Unity (thanks to Jim Vaughn)
+ * 
+ * New in v2.1.7:
+ * - Improved performance and fixes for large single line files (thanks to mcmorry)
  * 
  * Bug fixed in v2.1.6:
  * - Incorrect handling of rich text tags (thanks to Callski)
@@ -155,7 +157,7 @@ public class ScriptInspector : Editor
 
 	public static string GetVersionString()
 	{
-		return "2.1.6, January 2014";
+		return "2.1.8, May 2014";
 	}
 
 	public void OnDisable()

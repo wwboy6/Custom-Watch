@@ -1,5 +1,5 @@
 ﻿/* SCRIPT INSPECTOR 2
- * version 2.1.6, January 2014
+ * version 2.1.8, May 2014
  * Copyright © 2012-2014, Flipbook Games
  * 
  * Unity's legendary custom inspector for C#, UnityScript and Boo scripts,
@@ -26,7 +26,7 @@ using System.Reflection;
 [Serializable, StructLayout(LayoutKind.Sequential)]
 public class FGTextBuffer : ScriptableObject
 {
-	[Serializable, StructLayout(LayoutKind.Sequential)]
+	//[Serializable, StructLayout(LayoutKind.Sequential)]
 	public class TextBlock
 	{
 		public GUIStyle style;
@@ -102,6 +102,8 @@ public class FGTextBuffer : ScriptableObject
 	public string guid = "";
 	[SerializeField, HideInInspector]
 	public bool justSavedNow = false;
+	[SerializeField, HideInInspector]
+	public bool needsReload = false;
 
 	[NonSerialized]
 	private List<FGTextEditor> editors = new List<FGTextEditor>();
@@ -188,6 +190,12 @@ public class FGTextBuffer : ScriptableObject
 	public void OnEnable()
 	{
 		hideFlags = HideFlags.HideAndDontSave;
+		if (needsReload)
+		{
+			//string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+			//Debug.LogError("needsReload == true !!! " + Path.GetFileName(assetPath));
+			Reload();
+		}
 	}
 
 	public void OnDisable()
@@ -316,7 +324,7 @@ public class FGTextBuffer : ScriptableObject
 			lineEnding = "\n";
 			try
 			{
-				Stream stream = new FileStream(assetPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+				Stream stream = new BufferedStream(new FileStream(assetPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), 1024);
 				if (stream != null)
 					streamReader = new StreamReader(stream, true);
 				codePage = Encoding.UTF8.CodePage;
@@ -355,6 +363,7 @@ public class FGTextBuffer : ScriptableObject
 
 	public void Reload()
 	{
+		needsReload = !justSavedNow;
 		EditorApplication.update -= ReloadOnUpdate;
 		EditorApplication.update += ReloadOnUpdate;
 	}
@@ -367,21 +376,28 @@ public class FGTextBuffer : ScriptableObject
 		{
 			justSavedNow = false;
 			RescanHyperlinks();
+
+			UpdateViews();
 		}
 		else
 		{
 			FGCodeWindow.CheckAssetRename(guid);
 
-			if (IsModified && !EditorUtility.DisplayDialog(
-				"Script Inspector 2",
-				AssetDatabase.GUIDToAssetPath(guid)
-					+ "\n\nThis asset has been modified outside of Unity Editor.\nDo you want to reload it and lose the changes made in Script Inspector?",
-				"Reload",
-				"Keep changes"))
+			if (IsModified)
 			{
-				savedAtUndoPosition = 0;
-				UpdateViews();
-				return;
+				if (!EditorUtility.DisplayDialog(
+					"Script Inspector 2",
+					AssetDatabase.GUIDToAssetPath(guid)
+						+ "\n\nThis asset has been modified outside of Unity Editor.\nDo you want to reload it and lose the changes made in Script Inspector?",
+					"Reload",
+					"Keep changes"))
+				{
+					needsReload = false;
+
+					savedAtUndoPosition = 0;
+					UpdateViews();
+					return;
+				}
 			}
 
 			formatedLines = new FormatedLine[0];
@@ -448,11 +464,8 @@ public class FGTextBuffer : ScriptableObject
 			writer.Write(lines[numLines - 1]);
 
 			for (int i = 0; i < numParsedLines; ++i)
-			{
 				formatedLines[i].savedVersion = formatedLines[i].lastChange;
-				//if (formatedLines[i].lineFlags == LineFlags.TrackChangesBeforeSave)
-				//	formatedLines[i].lineFlags = LineFlags.TrackChangesAfterSave;
-			}
+
 			savedAtUndoPosition = undoPosition;
 
 			foreach (UndoRecord record in undoBuffer)
@@ -1247,6 +1260,7 @@ public class FGTextBuffer : ScriptableObject
 			string line = "";
 			if (i == 0)
 			{
+				StringBuilder sb = new StringBuilder();
 				while (!streamReader.EndOfStream)
 				{
 					char[] buffer = new char[1];
@@ -1267,9 +1281,10 @@ public class FGTextBuffer : ScriptableObject
 					}
 					else
 					{
-						line += buffer[0];
+						sb.Append(buffer[0]);
 					}
 				}
+				line = sb.ToString();
 
 				if (streamReader != null)
 				{
@@ -1301,6 +1316,7 @@ public class FGTextBuffer : ScriptableObject
 				streamReader.Close();
 				streamReader.Dispose();
 				streamReader = null;
+				needsReload = false;
 				break;
 			}
 

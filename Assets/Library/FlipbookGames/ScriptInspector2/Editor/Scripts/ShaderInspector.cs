@@ -1,5 +1,5 @@
 ﻿/* SCRIPT INSPECTOR 2
- * version 2.1.6, January 2014
+ * version 2.1.8, May 2014
  * Copyright © 2012-2014, Flipbook Games
  * 
  * Unity's legendary custom inspector for C#, UnityScript and Boo scripts,
