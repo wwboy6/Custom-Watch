@@ -13,7 +13,7 @@ public class Gear : RotatingObject {
 		}
 
 		set {
-			cycle *= value/_toothCount;
+			cycle *= (value*1.0f)/_toothCount;
 			_toothCount = value;
 			refresh();
 		}
