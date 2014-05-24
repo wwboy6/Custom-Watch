@@ -1,4 +1,6 @@
-﻿namespace HutongGames.PlayMaker.Actions
+﻿using UnityEngine;
+
+namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Logic)]
 	[Tooltip("Set Vector3 according to the boolean")]
@@ -14,11 +16,9 @@
         [Tooltip("The Vector3 variable to be set.")]
 		public FsmVector3 targetVariable;
 		
-		[UIHint(UIHint.Variable)]
         [Tooltip("The Vector3 value for the bool is true.")]
 		public FsmVector3 trueValue;
 		
-		[UIHint(UIHint.Variable)]
         [Tooltip("The Vector3 value for the bool is false.")]
 		public FsmVector3 falseValue;
 
@@ -33,14 +33,20 @@
 			falseValue = null;
 			everyFrame = false;
 		}
+		
+		protected void apply() {
+			if (boolVariable.Value && trueValue != null) {
+				//Debug.Log("true "+trueValue.Value);
+				targetVariable.Value = trueValue.Value;
+			} else if (!boolVariable.Value && falseValue != null) {
+				//Debug.Log("false "+falseValue.Value);
+				targetVariable.Value = falseValue.Value;
+			}
+		}
 
 		public override void OnEnter()
 		{
-			if (boolVariable.Value && trueValue != null) {
-				targetVariable.Value = trueValue.Value;
-			} else if (!boolVariable.Value && falseValue != null) {
-				targetVariable.Value = falseValue.Value;
-			}
+			apply();
 			
 			if (!everyFrame)
 			{
@@ -50,11 +56,7 @@
 		
 		public override void OnUpdate()
 		{
-			if (boolVariable.Value && trueValue != null) {
-				targetVariable.Value = trueValue.Value;
-			} else if (!boolVariable.Value && falseValue != null) {
-				targetVariable.Value = falseValue.Value;
-			}
+			apply();
 		}
 	}
 }

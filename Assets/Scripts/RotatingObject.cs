@@ -14,6 +14,7 @@ public class RotatingObject : TimeDependingObject {
 	//}
 	
 	protected override void mwOnUpdate(float time) {
+		Debug.Log(name +" "+ time*12);
 		transform.localRotation = Quaternion.AngleAxis(360*time, rotationAxis);
 	}
 	

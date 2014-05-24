@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 14a08ae861abc4acbb7a75a486a79bcc
+guid: 33b7147f10c5846a5bb412e4f99df4fc
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -41,5 +41,5 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites: []
-  spritePackingTag: icon
+  spritePackingTag: Gears
   userData: 

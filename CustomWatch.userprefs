@@ -1,9 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Library/PlayMaker/Actions/ActivateGameObject.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayMaker/LoadGameObject.cs">
     <Files>
-      <File FileName="Assets/Scripts/Gear.cs" Line="1" Column="1" />
-      <File FileName="Assets/Library/PlayMaker/Actions/ActivateGameObject.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/EditModeMenu.cs" Line="22" Column="20" />
+      <File FileName="Assets/Library/PlayMaker/Editor/FsmEditorWindow.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayMaker/SetV3If.cs" Line="1" Column="2" />
+      <File FileName="Assets/Scripts/PlayMaker/LoadGameObject.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

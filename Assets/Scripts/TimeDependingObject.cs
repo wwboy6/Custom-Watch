@@ -5,8 +5,8 @@ public abstract class TimeDependingObject : MonoBehaviour {
 
 	public MechanicalWatch mw;
 	public float timeOffset = 0;
-	public float cps = 1;
-	public float period = 1;
+	public float cycle = 1;
+	public float period = .25f;
 
 	protected virtual void Start () {
 		if (mw == null) mw = MechanicalWatch.currentMW;
@@ -16,7 +16,8 @@ public abstract class TimeDependingObject : MonoBehaviour {
 		if (mw.isRunning) {
 			float time = mw.timePassed+timeOffset;
 			if (period != 0) time = ((int) (time/period)) * period;
-			time /= cps;
+			time /= cycle;
+			time = time - ((int)time);
 			mwOnUpdate(time);
 		}
 	}

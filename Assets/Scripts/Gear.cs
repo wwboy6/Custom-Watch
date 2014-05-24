@@ -12,7 +12,7 @@ public class Gear : RotatingObject {
 		}
 
 		set {
-			cps *= value/_toothCount;
+			cycle *= value/_toothCount;
 			_toothCount = value;
 			refresh();
 		}
@@ -38,7 +38,7 @@ public class Gear : RotatingObject {
 	protected override void Start () {
 		base.Start();
 		refresh();
-		cps = toothCount*2f;
+		cycle = toothCount;
 	}
 
 	//protected override void Update () {
@@ -46,7 +46,7 @@ public class Gear : RotatingObject {
 	//}
 	
 	protected GameObject getToothPrefab() {
-		return (GameObject) Resources.Load("Prefabs/"+toothName);
+		return (GameObject) Resources.Load("Prefabs/GearTooths/"+toothName);
 	}
 	
 	[ContextMenu("Refresh")]
