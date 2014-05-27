@@ -31,3 +31,7 @@ MonoBehaviour:
   - SCALE
   - TOOTH
   - TOOTH_COUNT
+  - CHOOSE_LOC_DONE
+  - ROTATE_WATCH
+  - STOP_ROTATE_WATCH
+  - STOP
