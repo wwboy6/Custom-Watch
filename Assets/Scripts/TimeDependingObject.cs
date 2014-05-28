@@ -14,12 +14,16 @@ public abstract class TimeDependingObject : MonoBehaviour {
 	
 	protected virtual void Update () {
 		if (mw.isRunning) {
-			float time = mw.timePassed+timeOffset;
-			if (period != 0) time = ((int) (time/period)) * period;
-			time /= cycle;
-			time = time - ((int)time);
-			mwOnUpdate(time);
+			updateWithWatch();
 		}
+	}
+	
+	protected virtual void updateWithWatch() {
+		float time = mw.timePassed+timeOffset;
+		if (period != 0) time = ((int) (time/period)) * period;
+		time /= cycle;
+		time = time - ((int)time);
+		mwOnUpdate(time);
 	}
 	
 	protected abstract void mwOnUpdate(float time);
