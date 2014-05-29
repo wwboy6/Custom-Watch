@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using HutongGames.PlayMaker;
 
 public class Gear : RotatingObject {
+
+	public static int defaultToothCount = 12;
 	
 	[SerializeField]
 	protected int _toothCount = 0;
@@ -69,6 +71,8 @@ public class Gear : RotatingObject {
 			tooth.parent = transform;
 			tooth.localPosition = Vector3.zero;
 			tooth.localScale = Vector3.one;
+			float toothScale = 1.0f * defaultToothCount / toothCount;
+			tooth.Find("modelWrapper").localScale = new Vector3(toothScale, toothScale, 1);
 			tooth.localRotation = Quaternion.identity;
 			tooth.Rotate(new Vector3(0, 0, 360f*i/toothCount));
 			toothes.Add(tooth);
