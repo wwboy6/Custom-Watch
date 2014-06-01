@@ -1,13 +1,30 @@
 fileFormatVersion: 2
-guid: fd9d1e2ada2f5415488aa3da8b2a0ea3
+guid: 62bd59cfeab3e420f840efacf0a9aa87
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Cube_002
+    100000: Camera_002
+    100002: Camera_003
+    100004: Cube_005
+    100006: //RootNode
+    100008: Lamp_002
+    100010: Lamp_003
+    100012: Cube_006
+    400000: Camera_002
+    400002: Camera_003
+    400004: Cube_005
+    400006: //RootNode
+    400008: Lamp_002
+    400010: Lamp_003
+    400012: Cube_006
+    2300000: Cube_005
+    2300002: //RootNode
+    2300004: Cube_006
+    3300000: Cube_005
+    3300002: //RootNode
+    3300004: Cube_006
+    4300000: Cube_005
+    4300002: Cube_006
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -43,8 +60,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
   tangentSpace:
-    normalSmoothAngle: 100
-    splitTangentsAcrossUV: 0
+    normalSmoothAngle: 90
+    splitTangentsAcrossUV: 1
     normalImportMode: 1
     tangentImportMode: 2
   importAnimation: 1
