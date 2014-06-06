@@ -1872,16 +1872,24 @@ MonoBehaviour:
         - HutongGames.PlayMaker.Actions.SetGUIText
         - HutongGames.PlayMaker.Actions.ActivateGameObject
         - HutongGames.PlayMaker.Actions.ActivateGameObject
+        - HutongGames.PlayMaker.Actions.SetFloatValue
+        - HutongGames.PlayMaker.Actions.GetPosition
+        - HutongGames.PlayMaker.Actions.SetPosition
+        - HutongGames.PlayMaker.Actions.SetPosition
         - HutongGames.PlayMaker.Actions.GetMouseButtonDown
         customNames:
         - 
         - Activate dection plane
         - Show Watch
         - 
-        actionEnabled: 01010101
-        actionIsOpen: 01010101
-        actionStartIndex: 0000000003000000080000000d000000
-        actionHashCodes: ec086d87b4797e4ab4797e4a2d8b867b
+        - 
+        - 
+        - 
+        - 
+        actionEnabled: 0101010101010101
+        actionIsOpen: 0101010101010101
+        actionStartIndex: 0000000003000000080000000d00000010000000170000001f00000027000000
+        actionHashCodes: ec086d87b4797e4ab4797e4a79fc1deda290608e8b80e9a58b80e9a52d8b867b
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
@@ -1909,6 +1917,30 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             value: {fileID: 314537838}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 1
+            name: currentObject
+            tooltip: 
+            showInInspector: 1
+            networkSync: 0
+            value: {fileID: 0}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 1
+            name: watchDetectionPlane
+            tooltip: 
+            showInInspector: 1
+            networkSync: 0
+            value: {fileID: 1017558173}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 1
+            name: watchIndicator
+            tooltip: 
+            showInInspector: 1
+            networkSync: 0
+            value: {fileID: 314537838}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -1924,12 +1956,12 @@ MonoBehaviour:
           value: Choose Location
         fsmObjectParams: []
         fsmVarParams: []
-        byteData: 000100000000000100000000000000000046494e49534845440001
+        byteData: 0001000000000001000000000000000000016600000000000000000000000000000000000001000000000100000000010000000001660100000000000000000000000000000000010000000001000000000100000000016601000000000000000000000000000000000001000000000100000000010000000001660100000000000000000046494e49534845440001
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 14000000120000000100000014000000110000001100000001000000010000001400000011000000110000000100000001000000070000001700000011000000
+        paramDataType: 140000001200000001000000140000001100000011000000010000000100000014000000110000001100000001000000010000000f0000000f00000001000000140000001c0000000f0000000f0000000f0000000700000001000000140000001c0000000f0000000f0000000f000000070000000100000001000000140000001c0000000f0000000f0000000f000000070000000100000001000000070000001700000011000000
         paramName:
         - gameObject
         - text
@@ -1944,11 +1976,37 @@ MonoBehaviour:
         - recursive
         - resetOnExit
         - everyFrame
+        - floatVariable
+        - floatValue
+        - everyFrame
+        - gameObject
+        - vector
+        - x
+        - y
+        - z
+        - space
+        - everyFrame
+        - gameObject
+        - vector
+        - x
+        - y
+        - z
+        - space
+        - everyFrame
+        - lateUpdate
+        - gameObject
+        - vector
+        - x
+        - y
+        - z
+        - space
+        - everyFrame
+        - lateUpdate
         - button
         - sendEvent
         - storeResult
-        paramDataPos: 00000000000000000000000001000000010000000300000005000000060000000200000007000000090000000b0000000c0000000d0000001100000019000000
-        paramByteDataSize: 00000000000000000100000000000000020000000200000001000000010000000000000002000000020000000100000001000000040000000800000002000000
+        paramDataPos: 00000000000000000000000001000000010000000300000005000000060000000200000007000000090000000b0000000c0000000d00000013000000180000000300000019000000260000002b00000030000000360000003a000000040000003b000000480000004d00000052000000580000005c0000005d000000050000005e0000006b00000070000000750000007b0000007f0000008000000081000000850000008d000000
+        paramByteDataSize: 00000000000000000100000000000000020000000200000001000000010000000000000002000000020000000100000001000000060000000500000001000000000000000d0000000500000005000000060000000400000001000000000000000d000000050000000500000006000000040000000100000001000000000000000d000000050000000500000006000000040000000100000001000000040000000800000002000000
     - name: Trigger Watch
       description: 
       colorIndex: 0
@@ -2854,8 +2912,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 195.351562
-        y: 709.289062
+        x: 202.351562
+        y: 714.289062
         width: 142
         height: 32
       isBreakpoint: 0
@@ -3130,8 +3188,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 217.34375
-        y: 578.171875
+        x: 218.34375
+        y: 582.171875
         width: 109
         height: 64
       isBreakpoint: 0

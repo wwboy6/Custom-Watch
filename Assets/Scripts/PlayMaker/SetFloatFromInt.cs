@@ -2,7 +2,7 @@
 
 namespace HutongGames.PlayMaker.Actions
 {
-	[ActionCategory(ActionCategory.Logic)]
+	[ActionCategory(ActionCategory.Math)]
 	[Tooltip("Set float variable according to the integer")]
 	public class SetFloatFromInt : FsmStateAction
 	{
