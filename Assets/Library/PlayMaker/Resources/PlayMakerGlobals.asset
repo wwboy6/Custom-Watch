@@ -37,3 +37,4 @@ MonoBehaviour:
   - STOP
   - ROTATE_GEAR
   - RESET
+  - DEPTH

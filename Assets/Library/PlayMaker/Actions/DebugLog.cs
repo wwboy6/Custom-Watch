@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -11,19 +11,34 @@ namespace HutongGames.PlayMaker.Actions
 
         [Tooltip("Text to print to the PlayMaker log window.")]
 		public FsmString text;
+		
+        [Tooltip("Repeat every frame while the state is active.")]
+		public bool everyFrame;
 
 		public override void Reset()
 		{
 			logLevel = LogLevel.Info;
 			text = "";
 		}
+		
+		protected void apply() {
+			if (!string.IsNullOrEmpty(text.Value))
+				ActionHelpers.DebugLog(Fsm, logLevel, text.Value);
+		}
 
 		public override void OnEnter()
 		{
-			if (!string.IsNullOrEmpty(text.Value))
-				ActionHelpers.DebugLog(Fsm, logLevel, text.Value);
-
-			Finish();
+			apply();
+			
+			if (!everyFrame)
+			{
+			    Finish();
+			}
+		}
+		
+		public override void OnUpdate()
+		{
+			apply();
 		}
 	}
 }

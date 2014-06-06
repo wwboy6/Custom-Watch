@@ -5,6 +5,11 @@ public class MechanicalWatch : MonoBehaviour {
 
 	public static MechanicalWatch currentMW;
 	
+	[SerializeField]
+	protected float depth = 0.3f;
+	public float getDepth() { return depth; }
+	public void setDepth(float depth) { this.depth = depth; }
+	
 	protected float _timePassed;
 	public float timePassed {
 		get { return _timePassed; }
