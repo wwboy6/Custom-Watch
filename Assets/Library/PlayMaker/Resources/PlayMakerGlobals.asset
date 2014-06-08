@@ -38,3 +38,4 @@ MonoBehaviour:
   - ROTATE_GEAR
   - RESET
   - DEPTH
+  - TOOTH_PERIOD_NUM

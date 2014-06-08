@@ -8,6 +8,14 @@ public class Gear : RotatingObject {
 	public static int defaultToothCount = 12;
 	
 	[SerializeField]
+	protected int toothPeriodNumerator;
+	public int getToothPeriodNumerator() { return toothPeriodNumerator; }
+	public void setToothPeriodNumerator(int numerator) {
+		this.toothPeriodNumerator = numerator;
+		updateCycle();
+	}
+	
+	[SerializeField]
 	protected int _toothCount = 0;
 	public int toothCount {
 		get {
@@ -15,8 +23,9 @@ public class Gear : RotatingObject {
 		}
 
 		set {
-			cycle *= (value*1.0f)/_toothCount;
+			//cycle *= (value*1.0f)/_toothCount;
 			_toothCount = value;
+			updateCycle();
 			refresh();
 		}
 	}
@@ -43,7 +52,15 @@ public class Gear : RotatingObject {
 	protected override void Start () {
 		base.Start();
 		refresh();
-		cycle = toothCount;
+		
+		//cycle = toothCount;
+		toothPeriodNumerator = CustomWatchRuntime.sharedInstance.currentGearToothPeroidNumerator;
+		updateCycle();
+	}
+	
+	protected void updateCycle() {
+		float toothPeriodFactor = 1.0f;
+		cycle = toothCount * toothPeriodNumerator / toothPeriodFactor;
 	}
 
 	//protected override void Update () {
