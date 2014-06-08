@@ -1,4 +1,4 @@
-// (c) copyright Hutong Games, LLC 2010-2012. All rights reserved.
+﻿// (c) copyright Hutong Games, LLC 2010-2012. All rights reserved.
 
 using System;
 using System.Reflection;
@@ -99,7 +99,7 @@ namespace HutongGames.PlayMaker.Actions
             cachedBehaviour = behaviour.Value as MonoBehaviour;
             if (cachedBehaviour == null)
             {
-                errorString += "Behaviour is invalid!\n";
+                //errorString += "Behaviour is invalid!\n";
                 Finish();
                 return false;
             }
