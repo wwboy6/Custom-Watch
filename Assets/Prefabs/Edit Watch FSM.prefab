@@ -68,10 +68,10 @@ MonoBehaviour:
         - Reset currentObject
         - Hide World Detection Plane
         - Deactivate dection plane
-        - Hide Watch
+        - Hide Watch Indicator
         - 
         actionEnabled: 0101010101
-        actionIsOpen: 0001000000
+        actionIsOpen: 0000000100
         actionStartIndex: 0000000003000000080000000d00000012000000
         actionHashCodes: 49d19419b4797e4ab4797e4ab4797e4a3b448f99
         unityObjectParams: []
@@ -113,10 +113,10 @@ MonoBehaviour:
             value: {fileID: 0}
         - ownerOption: 1
           gameObject:
-            useVariable: 0
-            name: 
+            useVariable: 1
+            name: watchIndicator
             tooltip: 
-            showInInspector: 0
+            showInInspector: 1
             networkSync: 0
             value: {fileID: 0}
         animationCurveParams: []
@@ -205,10 +205,10 @@ MonoBehaviour:
           showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: watchDetectionPlane
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
         fsmOwnerDefaultParams:
@@ -401,8 +401,8 @@ MonoBehaviour:
         fsmOwnerDefaultParams:
         - ownerOption: 1
           gameObject:
-            useVariable: 0
-            name: 
+            useVariable: 1
+            name: statusLabel
             tooltip: 
             showInInspector: 0
             networkSync: 0
@@ -417,10 +417,10 @@ MonoBehaviour:
             value: {fileID: 0}
         - ownerOption: 1
           gameObject:
-            useVariable: 0
-            name: 
+            useVariable: 1
+            name: watchIndicator
             tooltip: 
-            showInInspector: 0
+            showInInspector: 1
             networkSync: 0
             value: {fileID: 0}
         - ownerOption: 1
@@ -538,7 +538,7 @@ MonoBehaviour:
         - Set Indicator
         - 
         actionEnabled: 01010101
-        actionIsOpen: 00000000
+        actionIsOpen: 00010101
         actionStartIndex: 0000000001000000050000000a000000
         actionHashCodes: 3ee6a00a6e5036b6b4797e4aeec9d968
         unityObjectParams: []
@@ -554,8 +554,8 @@ MonoBehaviour:
             value: {fileID: 0}
         - ownerOption: 1
           gameObject:
-            useVariable: 0
-            name: 
+            useVariable: 1
+            name: runningIndicator
             tooltip: 
             showInInspector: 0
             networkSync: 0
@@ -1694,8 +1694,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 218.34375
-        y: 582.171875
+        x: 217.34375
+        y: 593
         width: 109
         height: 64
       isBreakpoint: 0
@@ -2329,7 +2329,7 @@ MonoBehaviour:
           typeName: UnityEngine.MonoBehaviour
           value: {fileID: 0}
         fsmVarParams:
-        - variableName: f
+        - variableName: 
           useVariable: 1
           type: 0
           floatValue: 0
@@ -2885,9 +2885,21 @@ MonoBehaviour:
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
+        name: runningIndicator
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        value: {fileID: 0}
+      - useVariable: 1
         name: screenDetectionPlane
         tooltip: 
         showInInspector: 1
+        networkSync: 0
+        value: {fileID: 0}
+      - useVariable: 1
+        name: statusLabel
+        tooltip: 
+        showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
