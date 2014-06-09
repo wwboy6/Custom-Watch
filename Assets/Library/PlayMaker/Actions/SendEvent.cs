@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
 
 using System;
 
@@ -37,7 +37,7 @@ namespace HutongGames.PlayMaker.Actions
 			if (delay.Value < 0.001f)
 			{
 				Fsm.Event(eventTarget, sendEvent);
-				if (!everyFrame) Finish();
+				Finish();
 			}
 			else
 			{
@@ -52,15 +52,6 @@ namespace HutongGames.PlayMaker.Actions
 				if (DelayedEvent.WasSent(delayedEvent))
 				{
 					Finish();
-				}
-			} else {
-				if (delay.Value < 0.001f)
-				{
-					Fsm.Event(eventTarget, sendEvent);
-				}
-				else
-				{
-					delayedEvent = Fsm.DelayedEvent(eventTarget, sendEvent, delay.Value);
 				}
 			}
 		}

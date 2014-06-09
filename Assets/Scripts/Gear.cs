@@ -16,6 +16,14 @@ public class Gear : RotatingObject {
 	}
 	
 	[SerializeField]
+	protected int toothPeriodFactor;
+	public int getToothPeriodFactor() { return toothPeriodFactor; }
+	public void setToothPeriodFactor(int factor) {
+		this.toothPeriodFactor = factor;
+		updateCycle();
+	}
+	
+	[SerializeField]
 	protected int _toothCount = 0;
 	public int toothCount {
 		get {
@@ -55,11 +63,11 @@ public class Gear : RotatingObject {
 		
 		//cycle = toothCount;
 		toothPeriodNumerator = CustomWatchRuntime.sharedInstance.currentGearToothPeroidNumerator;
+		toothPeriodFactor = CustomWatchRuntime.sharedInstance.currentGearToothPeroidFactor;
 		updateCycle();
 	}
 	
 	protected void updateCycle() {
-		float toothPeriodFactor = 1.0f;
 		cycle = toothCount * toothPeriodNumerator / toothPeriodFactor;
 	}
 

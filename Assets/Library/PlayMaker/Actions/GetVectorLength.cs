@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
 
 using UnityEngine;
 
@@ -12,6 +12,8 @@ namespace HutongGames.PlayMaker.Actions
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
 		public FsmFloat storeLength;
+		
+		[Tooltip("Repeat every frame while the state is active.")]
 		public bool everyFrame;
 		
 		public override void Reset()
@@ -22,18 +24,20 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter()
 		{
-			DoVectorLength();
+			apply();
 			
-			if(!everyFrame)
+			if (!everyFrame)
+			{
 				Finish();
+			}
 		}
 		
-		public override void OnUpdate ()
+		public override void OnUpdate()
 		{
-			DoVectorLength();
+			apply();
 		}
 		
-		void DoVectorLength()
+		void apply()
 		{
 			if (vector3 == null) return;
 			if (storeLength == null) return;
