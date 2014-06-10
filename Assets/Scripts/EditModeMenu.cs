@@ -10,7 +10,10 @@ public class EditModeMenu : MonoBehaviour {
 	public Transform buttonFocus;
 	public GameObject runningIndicator;
 	public KMenu gearsMenu;
+	public KMenu rosMenu;
 	public KMenu modifyMenu;
+	public GameObject toothCountButton;
+	public GameObject speedButton;
 	public KNumberField toothCountNF;
 	public KNumberField speedNumeratorNF;
 	public KNumberField speedFactorNF;
@@ -19,6 +22,7 @@ public class EditModeMenu : MonoBehaviour {
 
 	GameObject watchPart;
 	Gear gear;
+	RotatingObject rotatingObject;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +42,23 @@ public class EditModeMenu : MonoBehaviour {
 			button.target = this;
 			button.callbackName = "gearButtonOnPressed";
 
+			pos += diff;
+		}
+		
+		GameObject[] rosButtons = Resources.LoadAll<GameObject>("Prefabs/RotatingObjectButtons");
+		
+		pos = new Vector3(0, 1.2f, 0);
+		diff = new Vector3(0, 1.2f, 0);
+		foreach (GameObject roButton in rosButtons) {
+			Transform btn = ((GameObject) Instantiate (roButton)).transform;
+			btn.name = roButton.name;
+			btn.parent = rosMenu.transform;
+			btn.localPosition = pos;
+			
+			KButton button = btn.gameObject.AddComponent<KButton>();
+			button.target = this;
+			button.callbackName = "roButtonOnPressed";
+			
 			pos += diff;
 		}
 		
@@ -100,17 +121,43 @@ public class EditModeMenu : MonoBehaviour {
 		gearsMenu.hide();
 		hideButtonFocus();
 	}
+	
+	public void roButtonOnPressed(KButton sender) {
+		FsmGameObject targetPrefab = editWatchFSM.Fsm.GetFsmGameObject("targetPrefab");
+		targetPrefab.Value = (GameObject) Resources.Load("Prefabs/RotatingObjects/"+sender.name);
+		FsmGameObject currentObject = editWatchFSM.Fsm.GetFsmGameObject("currentObject");
+		currentObject.Value = null;
+		FsmGameObject returnReceiver = editWatchFSM.Fsm.GetFsmGameObject("returnReceiver");
+		returnReceiver.Value = gameObject;
+		editWatchFSM.Fsm.BroadcastEvent("CHOOSE_LOC");
+		
+		rosMenu.hide();
+		hideButtonFocus();
+	}
 
 	public void selectWatchPart(GameObject watchPart) {
 		this.watchPart = watchPart;
 		gear = watchPart.GetComponent<Gear>();
 		
 		if (gear != null) {
+			toothCountButton.SetActive(true);
+			speedButton.SetActive(true);
+
 			toothCountNF.setValue(gear.getToothCount());
 			speedNumeratorNF.setValue(gear.getToothPeriodNumerator());
 			speedFactorNF.setValue(gear.getToothPeriodFactor());
 			
 			modifyMenu.show();
+			return;
+		}
+
+		rotatingObject = watchPart.GetComponent<RotatingObject>();
+		if (rotatingObject != null) {
+			toothCountButton.SetActive(false);
+			speedButton.SetActive(false);
+
+			modifyMenu.show();
+			return;
 		}
 	}
 
