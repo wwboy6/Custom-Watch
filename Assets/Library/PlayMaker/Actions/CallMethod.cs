@@ -99,7 +99,7 @@ namespace HutongGames.PlayMaker.Actions
             cachedBehaviour = behaviour.Value as MonoBehaviour;
             if (cachedBehaviour == null)
             {
-                //errorString += "Behaviour is invalid!\n";
+                errorString += "Behaviour is invalid!\n";
                 Finish();
                 return false;
             }

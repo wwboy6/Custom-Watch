@@ -1,8 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EditModeMenu.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Standard Assets/Toon Shading/Sources/Shaders/Toony-BasicOutline.shader">
     <Files>
-      <File FileName="Assets/Scripts/EditModeMenu.cs" Line="134" Column="18" />
+      <File FileName="Assets/Scripts/EditModeMenu.cs" Line="194" Column="29" />
+      <File FileName="Assets/Scripts/TimeDependingObject.cs" Line="16" Column="1" />
+      <File FileName="Assets/Standard Assets/Toon Shading/Sources/Shaders/Toony-BasicOutline.shader" Line="19" Column="25" />
+      <File FileName="Assets/Standard Assets/Toon Shading/Sources/Shaders/Toony-Basic.shader" Line="73" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

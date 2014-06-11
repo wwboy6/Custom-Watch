@@ -9,8 +9,11 @@ public class EditModeMenu : MonoBehaviour {
 
 	public Transform buttonFocus;
 	public GameObject runningIndicator;
+	public KMenu topMenu;
 	public KMenu gearsMenu;
 	public KMenu rosMenu;
+	public KMenu sosMenu;
+	public KMenu oosMenu;
 	public KMenu modifyMenu;
 	public GameObject toothCountButton;
 	public GameObject speedButton;
@@ -24,43 +27,35 @@ public class EditModeMenu : MonoBehaviour {
 	Gear gear;
 	RotatingObject rotatingObject;
 
-	// Use this for initialization
-	void Start () {
-		runningIndicator.SetActive(watch.isRunning);
-
-		GameObject[] gearButtons = Resources.LoadAll<GameObject>("Prefabs/GearButtons");
+	void prepareItemMenu(string buttonPrefabFolder, KMenu menu, string callbackName) {
+		GameObject[] buttonPrefabs = Resources.LoadAll<GameObject>("Prefabs/"+buttonPrefabFolder);
 
 		Vector3 pos = new Vector3(0, 1.2f, 0);
 		Vector3 diff = new Vector3(0, 1.2f, 0);
-		foreach (GameObject gearButton in gearButtons) {
-			Transform btn = ((GameObject) Instantiate (gearButton)).transform;
-			btn.name = gearButton.name;
-			btn.parent = gearsMenu.transform;
-			btn.localPosition = pos;
-
-			KButton button = btn.gameObject.AddComponent<KButton>();
-			button.target = this;
-			button.callbackName = "gearButtonOnPressed";
-
-			pos += diff;
-		}
-		
-		GameObject[] rosButtons = Resources.LoadAll<GameObject>("Prefabs/RotatingObjectButtons");
-		
-		pos = new Vector3(0, 1.2f, 0);
-		diff = new Vector3(0, 1.2f, 0);
-		foreach (GameObject roButton in rosButtons) {
-			Transform btn = ((GameObject) Instantiate (roButton)).transform;
-			btn.name = roButton.name;
-			btn.parent = rosMenu.transform;
+		foreach (GameObject buttonPrefab in buttonPrefabs) {
+			Transform btn = ((GameObject) Instantiate (buttonPrefab)).transform;
+			btn.name = buttonPrefab.name;
+			btn.parent = menu.transform;
 			btn.localPosition = pos;
 			
 			KButton button = btn.gameObject.AddComponent<KButton>();
 			button.target = this;
-			button.callbackName = "roButtonOnPressed";
+			button.callbackName = callbackName;
 			
 			pos += diff;
 		}
+	}
+
+	// Use this for initialization
+	void Start () {
+		topMenu = GetComponent<KMenu>();
+
+		runningIndicator.SetActive(watch.isRunning);
+
+		prepareItemMenu ("GearButtons", gearsMenu, "gearButtonOnPressed");
+		prepareItemMenu ("RotatingObjectButtons", rosMenu, "roButtonOnPressed");
+		prepareItemMenu ("StaticObjectButtons", sosMenu, "sosButtonOnPressed");
+		prepareItemMenu ("OtherObjectButtons", oosMenu, "oosButtonOnPressed");
 		
 		Component[] buttons = GetComponentsInChildren<KMenuButton>(true);
 		foreach (KMenuButton button in buttons) {
@@ -137,6 +132,12 @@ public class EditModeMenu : MonoBehaviour {
 
 	public void selectWatchPart(GameObject watchPart) {
 		this.watchPart = watchPart;
+		if (watchPart == null) {
+			gear = null;
+			rotatingObject = null;
+			return;
+		}
+
 		gear = watchPart.GetComponent<Gear>();
 		
 		if (gear != null) {
@@ -176,6 +177,21 @@ public class EditModeMenu : MonoBehaviour {
 	
 	public void speedFactorOnChange(KNumberField numberField) {
 		gear.setToothPeriodFactor(numberField.getValue());
+	}
+
+	public void rotateXButtonOnPressed(KButton sender) {
+		gear.addRotationX(90);
+	}
+	
+	public void rotateYButtonOnPressed(KButton sender) {
+		gear.addRotationY(90);
+	}
+
+	public void deleteButtonOnPressed(KButton sender) {
+		Destroy(watchPart);
+		selectWatchPart(null);
+		hideButtonFocus();
+		topMenu.resetToRootMenu();
 	}
 
 }

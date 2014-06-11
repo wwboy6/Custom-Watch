@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Toony White
-  m_Shader: {fileID: 4800000, guid: 9ce107479d11178d11005b9844295342, type: 3}
+  m_Shader: {fileID: 4800000, guid: d261b255ae16b484badf7ad7ad8f8b76, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -49,7 +49,7 @@ Material:
       data:
         first:
           name: _Outline
-        second: .00499999989
+        second: .00399999972
       data:
         first:
           name: _ColorMerge
@@ -58,7 +58,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .462686539, g: .462686539, b: .462686539, a: 1}
+        second: {r: .492647052, g: .492647052, b: .492647052, a: 1}
       data:
         first:
           name: _Emission
