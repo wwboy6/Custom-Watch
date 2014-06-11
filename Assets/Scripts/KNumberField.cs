@@ -11,10 +11,13 @@ public class KNumberField : MonoBehaviour {
 	[SerializeField]
 	int value = 5;
 	public int getValue () { return value; }
-	public void setValue (int v) {
+	public void updateValue(int v) {
 		value = Mathf.Clamp(v, min, max);
-		target.SendMessage(callbackName, this);
 		updateUI();
+	}
+	public void setValue (int v) {
+		updateValue(v);
+		target.SendMessage(callbackName, this);
 	}
 
 	public int min = 1;

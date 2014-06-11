@@ -7,3 +7,13 @@
 8 RGBA(223.540, 249.222, 16.556, 255.000)
 
 9 RGBA(251.483, 255.000, 0.000, 255.000)
+
+
+watch part selection indicator
+
+rotating object should rotate target transform instead of itself
+
+oscillating object
+
+rename rotate to rotate gear
+rotation ui for non-gear objects

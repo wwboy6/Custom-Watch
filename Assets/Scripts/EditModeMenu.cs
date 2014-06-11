@@ -88,7 +88,8 @@ public class EditModeMenu : MonoBehaviour {
 	}
 
 	public void resetToRootMenu() {
-		hideButtonFocus ();
+		selectWatchPart(null);
+		hideButtonFocus();
 	}
 
 	public void onChooseLocationFinish(GameObject watchPart) {
@@ -130,40 +131,62 @@ public class EditModeMenu : MonoBehaviour {
 		hideButtonFocus();
 	}
 
+	public void updateMaterial(GameObject wp) {
+		bool isSelect = wp == this.watchPart;
+
+		Behaviour[] materialBanks = wp.transform.GetComponentsInChildren<MaterialBank>();
+		foreach (MaterialBank materialBank in materialBanks) {
+			if (isSelect) materialBank.select();
+			else materialBank.reset();
+		}
+	}
+
 	public void selectWatchPart(GameObject watchPart) {
+		GameObject prevWP = this.watchPart;
+		
 		this.watchPart = watchPart;
+
+		//deselect effect
+
+		updateMaterial(prevWP);
+
+		//check null
+
 		if (watchPart == null) {
 			gear = null;
 			rotatingObject = null;
 			return;
 		}
+		
+		//select effect
+
+		updateMaterial(watchPart);
+
+		//check part type
 
 		gear = watchPart.GetComponent<Gear>();
+		rotatingObject = watchPart.GetComponent<RotatingObject>();
 		
 		if (gear != null) {
 			toothCountButton.SetActive(true);
 			speedButton.SetActive(true);
 
-			toothCountNF.setValue(gear.getToothCount());
-			speedNumeratorNF.setValue(gear.getToothPeriodNumerator());
-			speedFactorNF.setValue(gear.getToothPeriodFactor());
+			toothCountNF.updateValue(gear.getToothCount());
+			speedNumeratorNF.updateValue(gear.getToothPeriodNumerator());
+			speedFactorNF.updateValue(gear.getToothPeriodFactor());
 			
 			modifyMenu.show();
-			return;
-		}
-
-		rotatingObject = watchPart.GetComponent<RotatingObject>();
-		if (rotatingObject != null) {
+		} else if (rotatingObject != null) {
 			toothCountButton.SetActive(false);
 			speedButton.SetActive(false);
 
 			modifyMenu.show();
-			return;
 		}
 	}
 
 	public void toothCountOnChange(KNumberField numberField) {
 		gear.setToothCount(numberField.getValue());
+		updateMaterial(watchPart);
 	}
 
 	public void runButtonOnPressed(KButton sender) {
@@ -188,10 +211,8 @@ public class EditModeMenu : MonoBehaviour {
 	}
 
 	public void deleteButtonOnPressed(KButton sender) {
-		Destroy(watchPart);
-		selectWatchPart(null);
-		hideButtonFocus();
 		topMenu.resetToRootMenu();
+		Destroy(watchPart);
 	}
 
 }
