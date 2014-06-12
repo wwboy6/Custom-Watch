@@ -93,7 +93,7 @@ public class Gear : RotatingObject {
 		GameObject toothPrefab = getToothPrefab();
 		for (int i=0; i<toothCount; ++i) {
 			Transform tooth = ((GameObject) Instantiate(toothPrefab)).transform;
-			tooth.parent = transform;
+			tooth.parent = model;
 			tooth.localPosition = Vector3.zero;
 			tooth.localScale = Vector3.one;
 			float toothScale = 1.0f * defaultToothCount / toothCount;

@@ -1,17 +1,10 @@
 0 RGBA(0.000, 203.000, 149.000, 255.000)
-
 4 RGBA(111.770, 226.111, 82.778, 255.000)
-
 6 RGBA(167.655, 237.667, 49.667, 255.000)
-
 8 RGBA(223.540, 249.222, 16.556, 255.000)
-
 9 RGBA(251.483, 255.000, 0.000, 255.000)
 
 
-watch part selection indicator
-
-rotating object should rotate target transform instead of itself
 
 oscillating object
 

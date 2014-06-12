@@ -132,6 +132,8 @@ public class EditModeMenu : MonoBehaviour {
 	}
 
 	public void updateMaterial(GameObject wp) {
+		if (wp == null) return;
+
 		bool isSelect = wp == this.watchPart;
 
 		Behaviour[] materialBanks = wp.transform.GetComponentsInChildren<MaterialBank>();
@@ -168,6 +170,8 @@ public class EditModeMenu : MonoBehaviour {
 		rotatingObject = watchPart.GetComponent<RotatingObject>();
 		
 		if (gear != null) {
+			Debug.Log ("select gear:"+gear.name);
+			rotatingObject = gear;
 			toothCountButton.SetActive(true);
 			speedButton.SetActive(true);
 
@@ -177,6 +181,7 @@ public class EditModeMenu : MonoBehaviour {
 			
 			modifyMenu.show();
 		} else if (rotatingObject != null) {
+			Debug.Log ("select rotatingObject:"+rotatingObject.name);
 			toothCountButton.SetActive(false);
 			speedButton.SetActive(false);
 
@@ -203,11 +208,11 @@ public class EditModeMenu : MonoBehaviour {
 	}
 
 	public void rotateXButtonOnPressed(KButton sender) {
-		gear.addRotationX(90);
+		watchPart.transform.rotation *= Quaternion.Euler(90, 0, 0);
 	}
 	
 	public void rotateYButtonOnPressed(KButton sender) {
-		gear.addRotationY(90);
+		watchPart.transform.rotation *= Quaternion.Euler(0, 90, 0);
 	}
 
 	public void deleteButtonOnPressed(KButton sender) {
