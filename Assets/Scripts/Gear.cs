@@ -7,8 +7,12 @@ public class Gear : RotatingObject {
 
 	public static int defaultToothCount = 12;
 	
+	public override void setCycle(float value) {
+		throw new System.Exception("setCycle is denied for gear");
+	}
+	
 	[SerializeField]
-	protected int toothPeriodNumerator;
+	protected int toothPeriodNumerator = 1;
 	public int getToothPeriodNumerator() { return toothPeriodNumerator; }
 	public void setToothPeriodNumerator(int numerator) {
 		this.toothPeriodNumerator = numerator;
@@ -16,7 +20,7 @@ public class Gear : RotatingObject {
 	}
 	
 	[SerializeField]
-	protected int toothPeriodFactor;
+	protected int toothPeriodFactor = 1;
 	public int getToothPeriodFactor() { return toothPeriodFactor; }
 	public void setToothPeriodFactor(int factor) {
 		this.toothPeriodFactor = factor;
@@ -62,8 +66,6 @@ public class Gear : RotatingObject {
 		refresh();
 		
 		//cycle = toothCount;
-		toothPeriodNumerator = CustomWatchRuntime.sharedInstance.currentGearToothPeroidNumerator;
-		toothPeriodFactor = CustomWatchRuntime.sharedInstance.currentGearToothPeroidFactor;
 		updateCycle();
 	}
 	

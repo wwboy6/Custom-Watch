@@ -6,7 +6,13 @@
 
 
 
+move these to edit mode menu
+toothPeriodNumerator = CustomWatchRuntime.sharedInstance.currentGearToothPeroidNumerator;
+toothPeriodFactor = CustomWatchRuntime.sharedInstance.currentGearToothPeroidFactor;
+		
 oscillating object
 
 rename rotate to rotate gear
 rotation ui for non-gear objects
+
+ui for time offset (set time)

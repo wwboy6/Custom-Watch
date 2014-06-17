@@ -26,15 +26,17 @@ public class EditModeMenu : MonoBehaviour {
 	GameObject watchPart;
 	Gear gear;
 	RotatingObject rotatingObject;
+	OscillatingObject oscillatingObject;
 
 	void prepareItemMenu(string buttonPrefabFolder, KMenu menu, string callbackName) {
-		GameObject[] buttonPrefabs = Resources.LoadAll<GameObject>("Prefabs/"+buttonPrefabFolder);
+		Sprite[] sprites = Resources.LoadAll<Sprite>("Prefabs/"+buttonPrefabFolder);
 
 		Vector3 pos = new Vector3(0, 1.2f, 0);
 		Vector3 diff = new Vector3(0, 1.2f, 0);
-		foreach (GameObject buttonPrefab in buttonPrefabs) {
-			Transform btn = ((GameObject) Instantiate (buttonPrefab)).transform;
-			btn.name = buttonPrefab.name;
+		foreach (Sprite sprite in sprites) {
+			Transform btn = ((GameObject) Instantiate (Resources.Load("Prefabs/WatchPartButton"))).transform;
+			btn.name = sprite.name;
+			btn.GetComponent<SpriteRenderer>().sprite = sprite;
 			btn.parent = menu.transform;
 			btn.localPosition = pos;
 			
@@ -52,10 +54,10 @@ public class EditModeMenu : MonoBehaviour {
 
 		runningIndicator.SetActive(watch.isRunning);
 
-		prepareItemMenu ("GearButtons", gearsMenu, "gearButtonOnPressed");
-		prepareItemMenu ("RotatingObjectButtons", rosMenu, "roButtonOnPressed");
-		prepareItemMenu ("StaticObjectButtons", sosMenu, "sosButtonOnPressed");
-		prepareItemMenu ("OtherObjectButtons", oosMenu, "oosButtonOnPressed");
+		prepareItemMenu ("Gears", gearsMenu, "gearButtonOnPressed");
+		prepareItemMenu ("RotatingObjects", rosMenu, "roButtonOnPressed");
+		prepareItemMenu ("StaticObjects", sosMenu, "soButtonOnPressed");
+		prepareItemMenu ("OtherObjects", oosMenu, "ooButtonOnPressed");
 		
 		Component[] buttons = GetComponentsInChildren<KMenuButton>(true);
 		foreach (KMenuButton button in buttons) {
@@ -107,7 +109,7 @@ public class EditModeMenu : MonoBehaviour {
 
 	public void gearButtonOnPressed(KButton sender) {
 		FsmGameObject targetPrefab = editWatchFSM.Fsm.GetFsmGameObject("targetPrefab");
-		targetPrefab.Value = (GameObject) Resources.Load("Prefabs/Gears/"+sender.name);
+		targetPrefab.Value = Resources.Load<GameObject>("Prefabs/Gears/"+sender.name);
 		FsmGameObject currentObject = editWatchFSM.Fsm.GetFsmGameObject("currentObject");
 		currentObject.Value = null;
 		FsmGameObject returnReceiver = editWatchFSM.Fsm.GetFsmGameObject("returnReceiver");
@@ -120,7 +122,7 @@ public class EditModeMenu : MonoBehaviour {
 	
 	public void roButtonOnPressed(KButton sender) {
 		FsmGameObject targetPrefab = editWatchFSM.Fsm.GetFsmGameObject("targetPrefab");
-		targetPrefab.Value = (GameObject) Resources.Load("Prefabs/RotatingObjects/"+sender.name);
+		targetPrefab.Value = Resources.Load<GameObject>("Prefabs/RotatingObjects/"+sender.name);
 		FsmGameObject currentObject = editWatchFSM.Fsm.GetFsmGameObject("currentObject");
 		currentObject.Value = null;
 		FsmGameObject returnReceiver = editWatchFSM.Fsm.GetFsmGameObject("returnReceiver");
@@ -128,6 +130,32 @@ public class EditModeMenu : MonoBehaviour {
 		editWatchFSM.Fsm.BroadcastEvent("CHOOSE_LOC");
 		
 		rosMenu.hide();
+		hideButtonFocus();
+	}
+	
+	public void soButtonOnPressed(KButton sender) {
+		FsmGameObject targetPrefab = editWatchFSM.Fsm.GetFsmGameObject("targetPrefab");
+		targetPrefab.Value = Resources.Load<GameObject>("Prefabs/StaticObjects/"+sender.name);
+		FsmGameObject currentObject = editWatchFSM.Fsm.GetFsmGameObject("currentObject");
+		currentObject.Value = null;
+		FsmGameObject returnReceiver = editWatchFSM.Fsm.GetFsmGameObject("returnReceiver");
+		returnReceiver.Value = gameObject;
+		editWatchFSM.Fsm.BroadcastEvent("CHOOSE_LOC");
+		
+		sosMenu.hide();
+		hideButtonFocus();
+	}
+	
+	public void ooButtonOnPressed(KButton sender) {
+		FsmGameObject targetPrefab = editWatchFSM.Fsm.GetFsmGameObject("targetPrefab");
+		targetPrefab.Value = Resources.Load<GameObject>("Prefabs/OtherObjects/"+sender.name);
+		FsmGameObject currentObject = editWatchFSM.Fsm.GetFsmGameObject("currentObject");
+		currentObject.Value = null;
+		FsmGameObject returnReceiver = editWatchFSM.Fsm.GetFsmGameObject("returnReceiver");
+		returnReceiver.Value = gameObject;
+		editWatchFSM.Fsm.BroadcastEvent("CHOOSE_LOC");
+		
+		oosMenu.hide();
 		hideButtonFocus();
 	}
 
@@ -168,6 +196,7 @@ public class EditModeMenu : MonoBehaviour {
 
 		gear = watchPart.GetComponent<Gear>();
 		rotatingObject = watchPart.GetComponent<RotatingObject>();
+		oscillatingObject = watchPart.GetComponent<OscillatingObject>();
 		
 		if (gear != null) {
 			Debug.Log ("select gear:"+gear.name);
@@ -185,6 +214,12 @@ public class EditModeMenu : MonoBehaviour {
 			toothCountButton.SetActive(false);
 			speedButton.SetActive(false);
 
+			modifyMenu.show();
+		} else if (oscillatingObject != null) {
+			Debug.Log ("select oscillatingObject:"+oscillatingObject.name);
+			toothCountButton.SetActive(false);
+			speedButton.SetActive(false);
+			
 			modifyMenu.show();
 		}
 	}
