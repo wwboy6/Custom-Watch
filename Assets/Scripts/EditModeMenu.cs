@@ -171,7 +171,30 @@ public class EditModeMenu : MonoBehaviour {
 		}
 	}
 
+	public void configureNewWatchPart(GameObject watchPart) {
+		selectWatchPart(watchPart);
+
+		if (gear != null) {
+			gear.setToothPeriodNumerator(CustomWatchRuntime.sharedInstance.currentGearToothPeroidNumerator);
+			gear.setToothPeriodFactor(CustomWatchRuntime.sharedInstance.currentGearToothPeroidFactor);
+			gear.setPeriod(CustomWatchRuntime.sharedInstance.currentWatchPartPeriod);
+		} else if (rotatingObject != null) {
+			rotatingObject.setPeriod(CustomWatchRuntime.sharedInstance.currentWatchPartPeriod);
+		} else if (oscillatingObject != null) {
+			if (oscillatingObject.getPeriod() > 0) {
+				oscillatingObject.setPeriod(CustomWatchRuntime.sharedInstance.currentWatchPartPeriod);
+			} else {
+				oscillatingObject.setCycle(CustomWatchRuntime.sharedInstance.currentWatchPartPeriod*2);
+			}
+		}
+	}
+
 	public void selectWatchPart(GameObject watchPart) {
+		if (this.watchPart == watchPart) {
+			updateMaterial(watchPart);
+			return;
+		}
+
 		GameObject prevWP = this.watchPart;
 		
 		this.watchPart = watchPart;

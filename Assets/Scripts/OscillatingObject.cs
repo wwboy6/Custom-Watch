@@ -28,7 +28,7 @@ public class OscillatingObject : TimeDependingObject {
 
 		Debug.Log ("OscillatingObject::mwOnUpdate "+time+" "+angle);
 
-		model.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+		model.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 	}
 
 }

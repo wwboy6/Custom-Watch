@@ -188,8 +188,8 @@ MonoBehaviour:
   period: .25
   model: {fileID: 0}
   rotationAxis: {x: 0, y: 0, z: -1}
-  toothPeriodNumerator: 0
-  toothPeriodFactor: 0
+  toothPeriodNumerator: 1
+  toothPeriodFactor: 1
   _toothCount: 12
   _toothName: SquareGearTooth
   toothes:
